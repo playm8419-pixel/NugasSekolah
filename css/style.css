@@ -1,0 +1,285 @@
+/* ========== CUSTOM CSS (Hanya ~15% dari total styling) ========== */
+/* Background Gradient & Neon Effects */
+
+:root {
+  --neon-blue: #0ff;
+  --neon-purple: #b44dff;
+  --bg-dark: #0a0a0a;
+  --bg-light: #f8f9fa;
+  --text-light: #212529;
+}
+
+body {
+  background: var(--bg-dark);
+  color: white;
+  transition: background 0.3s, color 0.3s;
+}
+
+body.light-mode {
+  background: var(--bg-light);
+  color: var(--text-light);
+}
+
+body.light-mode .navbar,
+body.light-mode footer,
+body.light-mode .card {
+  background: white !important;
+  color: black !important;
+}
+
+body.light-mode .bg-black {
+  background: white !important;
+}
+
+body.light-mode .neon-text-blue,
+body.light-mode .neon-text-purple {
+  text-shadow: none !important;
+  color: #0d6efd !important;
+}
+
+/* Neon Text Glow */
+.neon-text-blue {
+  color: var(--neon-blue);
+  text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 40px #00ffffaa;
+}
+
+.neon-text-purple {
+  color: var(--neon-purple);
+  text-shadow: 0 0 10px var(--neon-purple), 0 0 20px #a020f0, 0 0 40px #b44dffaa;
+}
+
+/* Neon Button */
+.neon-btn {
+  background: transparent;
+  border: 2px solid var(--neon-blue);
+  color: var(--neon-blue);
+  box-shadow: 0 0 15px var(--neon-blue), 0 0 30px #00ffff66;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.neon-btn:hover {
+  background: var(--neon-blue);
+  color: black;
+  box-shadow: 0 0 25px var(--neon-blue), 0 0 50px #00ffff;
+}
+
+/* Play Now Button */
+.play-now-btn {
+  background: var(--neon-purple);
+  border: none;
+  color: white;
+  box-shadow: 0 0 20px var(--neon-purple);
+  animation: pulse 2s infinite;
+}
+
+.play-now-btn:hover {
+  background: #9b30ff;
+  color: white;
+  box-shadow: 0 0 30px var(--neon-purple);
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Loading Screen */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease;
+}
+
+.loading-content {
+  text-align: center;
+}
+
+.spinner-glow {
+  width: 60px;
+  height: 60px;
+  border: 4px solid var(--neon-blue);
+  border-top: 4px solid transparent;
+  border-radius: 50%;
+  margin: 0 auto;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 20px var(--neon-blue);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-bar {
+  width: 200px;
+  height: 6px;
+  background: #333;
+  border-radius: 3px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.loading-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue);
+  animation: fillBar 2s ease forwards;
+}
+
+@keyframes fillBar {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+/* Music Button */
+.music-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+/* Game Cards */
+.game-card {
+  background: #111;
+  border: 1px solid #333;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.game-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.3) !important;
+  border-color: var(--neon-blue);
+}
+
+.game-icon {
+  font-size: 3rem;
+}
+
+/* Profile Card */
+.profile-card {
+  background: #111;
+  border: 1px solid #333;
+}
+
+.avatar-circle {
+  width: 150px;
+  height: 150px;
+  background: #222;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.neon-border {
+  border: 4px solid var(--neon-purple);
+  box-shadow: 0 0 30px var(--neon-purple);
+}
+
+/* Skill Progress Bar */
+.skill-progress {
+  background: #222;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.skill-bar {
+  transition: width 1.5s ease;
+  border-radius: 20px;
+}
+
+.bg-purple {
+  background: var(--neon-purple) !important;
+}
+
+.text-purple {
+  color: var(--neon-purple) !important;
+}
+
+.border-purple {
+  border-color: var(--neon-purple) !important;
+}
+
+/* Game Main Card */
+.game-main-card {
+  background: #111;
+  border: 2px solid #333;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+}
+
+/* Carousel Slide */
+.carousel-slide {
+  height: 350px;
+  background: linear-gradient(135deg, #0a0a0a, #1a1a2e);
+}
+
+/* Quick number buttons */
+.quick-num:hover {
+  background: var(--neon-blue);
+  color: black;
+}
+
+/* Hero arcade machine */
+.arcade-screen {
+  width: 250px;
+  height: 250px;
+  background: #111;
+  border: 8px solid #333;
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arcade-screen-inner {
+  width: 90%;
+  height: 90%;
+  background: #000;
+  border: 2px solid var(--neon-blue);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+}
+
+/* Light mode adjustments for game */
+body.light-mode .game-main-card,
+body.light-mode .profile-card,
+body.light-mode .game-card {
+  background: white !important;
+  border-color: #dee2e6 !important;
+}
+
+body.light-mode .card.bg-black {
+  background: #f8f9fa !important;
+}
+
+body.light-mode .text-muted {
+  color: #6c757d !important;
+}
+
+body.light-mode .neon-text-blue,
+body.light-mode .neon-text-purple {
+  text-shadow: none;
+}

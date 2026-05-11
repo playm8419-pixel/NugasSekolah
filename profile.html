@@ -1,199 +1,193 @@
 <!DOCTYPE html>
-<html lang="id" class="dark">
+<html lang="id">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Albert's Profile | Profile</title>
-    <!-- Bootstrap 5 & Fonts -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Space+Grotesk:wght@600&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
-    
-    <style>
-        :root {
-            --bg-color: #131313;
-            --surface: #1b1b1c;
-            --primary: #005ac2;
-            --text-main: #e5e2e1;
-            --text-dim: #c2c6d6;
-        }
-
-        body { 
-            background-color: var(--bg-color); 
-            color: var(--text-main); 
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-        }
-
-        /* Navbar Styling */
-        .noir-nav { 
-            background: rgba(18, 18, 18, 0.8); 
-            backdrop-filter: blur(20px); 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
-        }
-
-        /* Timeline Styling */
-        .timeline-container { position: relative; padding-left: 30px; border-left: 2px solid #353535; }
-        .timeline-item { 
-            position: relative; margin-bottom: 40px; 
-            opacity: 0; transform: translateX(-20px); transition: all 0.6s ease-out; 
-        }
-        .timeline-item.active { opacity: 1; transform: translateX(0); }
-        .timeline-dot { 
-            position: absolute; left: -41px; top: 5px; width: 20px; height: 20px; 
-            background: var(--bg-color); border: 3px solid var(--primary); 
-            border-radius: 50%; box-shadow: 0 0 10px var(--primary); 
-        }
-
-        /* Game Box */
-        .game-canvas { 
-            height: 250px; background: #0e0e0e; border: 1px dashed var(--primary); 
-            position: relative; overflow: hidden; cursor: crosshair;
-        }
-        .target { 
-            position: absolute; width: 30px; height: 30px; background: var(--primary); 
-            border-radius: 4px; box-shadow: 0 0 15px var(--primary); 
-        }
-
-        .btn-noir { background: var(--primary); color: white; border: none; transition: 0.3s; }
-        .btn-noir:hover { background: #004395; box-shadow: 0 0 20px rgba(0, 90, 194, 0.4); color: white; }
-        .hero-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        /* Ganti link di bawah ini dengan link gambar pilihanmu */
-        background-image: url('https://img.pikbest.com/backgrounds/20250406/futuristic-technology-interface-background-3d-wallpaper-graphic-design-sale-abstract_11651041.jpg!bw800'); 
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed; /* Efek Parallax */
-        z-index: -2;
-        filter: brightness(35%) contrast(120%) saturate(0.5); /* Sentuhan Noir */
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Developer - Neo Arcade</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-<div class="hero-bg"></div>
-<div class="hero-overlay" style="position: absolute; width: 100%; height: 100vh; background: rgba(19,19,19,0.6); z-index: -1;"></div>
-
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top noir-nav py-3">
-    <div class="container">
-        <a class="navbar-brand fw-black tracking-tighter" href="index.html">PROFILE</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <div class="ms-auto d-flex gap-4 align-items-center">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="profile.html" class="nav-link active text-primary fw-bold">Profile</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-                <a href="gallery.html" class="nav-link">Gallery</a>
+<body class="bg-dark text-white" data-bs-theme="dark">
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner-glow"></div>
+            <h2 class="neon-text-blue mt-4">LOADING...</h2>
+            <div class="loading-bar mt-3">
+                <div class="loading-bar-fill" id="loadingBarFill"></div>
             </div>
         </div>
     </div>
-</nav>
 
-<main class="container" style="margin-top: 120px; padding-bottom: 80px;">
-    <div class="row g-5">
-        <!-- Kolom Kiri: Profil & Game -->
-        <div class="col-lg-9">
-            <section class="mb-5">
-                <h2 class="display-4 fw-bold mb-4" style="font-family: 'Space Grotesk';">PROFILE</h2>
-                <div class="p-4 rounded-4" style="background: var(--surface); border: 1px solid rgba(255,255,255,0.05);">
-                    <p class="mb-2"><span class="text-secondary small fw-bold uppercase">NAMA:</span><br>Albertus Adiputra Ibransjah</p>
-                    <p class="mb-2"><span class="text-secondary small fw-bold">STATUS:</span><br>Siswa Kelas 11 - Tech Enthusiast</p>
-                    <p class="mb-0"><span class="text-secondary small fw-bold">FOKUS:</span><br>Artificial Inteligence Engineer</p>
-                </div>
-            </section>
+    <!-- Background Music Toggle -->
+    <button id="musicToggle" class="btn btn-outline-info music-btn" title="Toggle Music">🔊</button>
 
-
-
-        <!-- Kolom Kanan: Timeline Pendidikan -->
-        <div class="col-lg-12">
-            <h2 class="display-6 fw-bold mb-4" style="font-family: 'Space Grotesk';">JEJAK PENDIDIKAN</h2>
-            <div class="timeline-container">
-                
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="p-4 rounded-4" style="background: var(--surface);">
-                        <span class="text-primary fw-bold small">2023 — SEKARANG</span>
-                        <h5 class="fw-bold mt-1">SMAK FRATERAN SURABAYA</h5>
-                        <p class="text-secondary mb-0 small">Mendalami ilmu alam dan dasar-dasar algoritma komputer tingkat lanjut.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="p-4 rounded-4" style="background: var(--surface);">
-                        <span class="text-secondary fw-bold small">2020 — 2023</span>
-                        <h5 class="fw-bold mt-1">SMPK ANGELUS CUSTOS SURABAYA</h5>
-                        <p class="text-secondary mb-0 small">Mulai mengeksplorasi pembuatan web statis dan logika pemrograman dasar.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="p-4 rounded-4" style="background: var(--surface);">
-                        <span class="text-secondary fw-bold small">2014 — 2020</span>
-                        <h5 class="fw-bold mt-1">SDK SANTO XAVERIUS SURABAYA</h5>
-                        <p class="text-secondary mb-0 small">Membangun minat dasar pada matematika dan ilmu pengetahuan.</p>
-                    </div>
-                </div>
-
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-info shadow-lg">
+        <div class="container">
+            <a class="navbar-brand neon-text-blue fw-bold fs-3" href="index.html">
+                🕹️ <span class="neon-text-purple">NEO</span> ARCADE
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link text-info mx-2" href="index.html">🏠 Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active neon-text-blue mx-2" href="profile.html">👤 Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-info mx-2" href="game.html">🎮 Play Game</a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <button id="darkModeToggle" class="btn btn-outline-warning btn-sm rounded-pill px-3">
+                            ☀️ Light Mode
+                        </button>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
-</main>
+    </nav>
 
-<footer class="py-5 text-center border-top border-secondary opacity-50 small">
-    © 2026 ALBERTUS ADIPUTRA IBRANSJAH
-</footer>
+    <!-- Profile Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Left Column - Photo & Bio -->
+                <div class="col-lg-4">
+                    <div class="card profile-card shadow-lg h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="profile-avatar mx-auto mb-4">
+                                <div class="avatar-circle neon-border">
+                                    <span class="display-1">👨‍💻</span>
+                                </div>
+                            </div>
+                            <h2 class="neon-text-purple fw-bold">Sobat Dev</h2>
+                            <p class="badge bg-info text-dark px-3 py-2 mb-3">Game Developer</p>
+                            <div id="typing-text" class="text-info fw-bold fs-5 mb-3"></div>
+                            <div class="social-links mt-3">
+                                <span class="badge bg-dark border border-info text-info mx-1 px-3 py-2">🎮 Gamer</span>
+                                <span class="badge bg-dark border border-purple text-purple mx-1 px-3 py-2">💻 Coder</span>
+                                <span class="badge bg-dark border border-info text-info mx-1 px-3 py-2">🎨 Designer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    // 1. Animasi Timeline saat Scroll
-    function revealTimeline() {
-        const items = document.querySelectorAll('.timeline-item');
-        items.forEach(item => {
-            const rect = item.getBoundingClientRect();
-            if (rect.top < window.innerHeight * 0.8) {
-                item.classList.add('active');
-            }
-        });
-    }
-    window.addEventListener('scroll', revealTimeline);
-    window.onload = revealTimeline;
+                <!-- Right Column - Biodata & Skills -->
+                <div class="col-lg-8">
+                    <div class="card profile-card shadow-lg h-100">
+                        <div class="card-body p-4">
+                            <h3 class="neon-text-blue mb-4">📋 Biodata</h3>
+                            <table class="table table-dark table-borderless text-info">
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-bold text-info" width="30%">Nama Lengkap</td>
+                                        <td>: Sobat Developer</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold text-info">Role</td>
+                                        <td>: Future Game Developer</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold text-info">Spesialisasi</td>
+                                        <td>: HTML, CSS, JavaScript, Game Design</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold text-info">Pengalaman</td>
+                                        <td>: 2+ Tahun Coding</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold text-info">Lokasi</td>
+                                        <td>: Indonesia 🌏</td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-    // 2. Mini Game Logic
-    let score = 0;
-    const area = document.getElementById('game-area');
-    const scoreDisplay = document.getElementById('score');
+                            <h3 class="neon-text-purple mb-4 mt-4">⚡ Skills & Expertise</h3>
 
-    function startGame() {
-        area.innerHTML = '';
-        spawn();
-    }
+                            <!-- Skill Progress Bars -->
+                            <div class="mb-3">
+                                <label class="text-info fw-bold mb-1">HTML5</label>
+                                <div class="progress skill-progress" style="height: 25px;">
+                                    <div class="progress-bar bg-info text-dark fw-bold skill-bar"
+                                    data-progress="95" style="width: 0%;">95%</div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="text-info fw-bold mb-1">CSS3 & Bootstrap</label>
+                                <div class="progress skill-progress" style="height: 25px;">
+                                    <div class="progress-bar bg-purple text-white fw-bold skill-bar"
+                                    data-progress="90" style="width: 0%;">90%</div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="text-info fw-bold mb-1">JavaScript</label>
+                                <div class="progress skill-progress" style="height: 25px;">
+                                    <div class="progress-bar bg-info text-dark fw-bold skill-bar"
+                                    data-progress="85" style="width: 0%;">85%</div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="text-info fw-bold mb-1">Game Design</label>
+                                <div class="progress skill-progress" style="height: 25px;">
+                                    <div class="progress-bar bg-purple text-white fw-bold skill-bar"
+                                    data-progress="78" style="width: 0%;">78%</div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="text-info fw-bold mb-1">UI/UX Design</label>
+                                <div class="progress skill-progress" style="height: 25px;">
+                                    <div class="progress-bar bg-info text-dark fw-bold skill-bar"
+                                    data-progress="72" style="width: 0%;">72%</div>
+                                </div>
+                            </div>
 
-    function spawn() {
-        const target = document.createElement('div');
-        target.className = 'target';
-        const x = Math.random() * (area.clientWidth - 35);
-        const y = Math.random() * (area.clientHeight - 35);
-        target.style.left = x + 'px';
-        target.style.top = y + 'px';
-        target.onclick = () => {
-            score++;
-            scoreDisplay.innerText = score;
-            target.remove();
-            spawn();
-        };
-        area.appendChild(target);
-        setTimeout(() => { if(target.parentElement) { target.remove(); spawn(); } }, 1000);
-    }
-</script>
+                            <!-- Game Stats -->
+                            <h3 class="neon-text-blue mb-4 mt-5">🏆 Statistik Game</h3>
+                            <div class="row g-3 text-center">
+                                <div class="col-4">
+                                    <div class="card bg-dark border border-info p-3">
+                                        <span class="display-6 neon-text-blue">🏆</span>
+                                        <h4 class="neon-text-blue mt-2" id="profileHighScore">0</h4>
+                                        <small class="text-muted">High Score</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="card bg-dark border border-purple p-3">
+                                        <span class="display-6 neon-text-purple">🎮</span>
+                                        <h4 class="neon-text-purple mt-2" id="gamesPlayed">0</h4>
+                                        <small class="text-muted">Games Played</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="card bg-dark border border-info p-3">
+                                        <span class="display-6 neon-text-blue">⭐</span>
+                                        <h4 class="neon-text-blue mt-2">100%</h4>
+                                        <small class="text-muted">Fun Rate</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Footer -->
+    <footer class="bg-black text-center text-info py-4 border-top border-info">
+        <div class="container">
+            <p class="mb-1 neon-text-blue">🕹️ Neo Arcade © 2025</p>
+            <p class="small text-muted mb-0">Profile Page | Dibuat dengan ❤️</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>

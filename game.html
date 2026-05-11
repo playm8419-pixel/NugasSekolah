@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Game - Neo Arcade</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js">
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-dark text-white" data-bs-theme="dark">
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner-glow"></div>
+            <h2 class="neon-text-blue mt-4">LOADING GAME...</h2>
+            <div class="loading-bar mt-3">
+                <div class="loading-bar-fill" id="loadingBarFill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Background Music Toggle -->
+    <button id="musicToggle" class="btn btn-outline-info music-btn" title="Toggle Music">🔊</button>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-info shadow-lg">
+        <div class="container">
+            <a class="navbar-brand neon-text-blue fw-bold fs-3" href="index.html">
+                🕹️ <span class="neon-text-purple">NEO</span> ARCADE
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link text-info mx-2" href="index.html">🏠 Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-info mx-2" href="profile.html">👤 Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active neon-text-blue mx-2" href="game.html">🎮 Play Game</a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <button id="darkModeToggle" class="btn btn-outline-warning btn-sm rounded-pill px-3">
+                            ☀️ Light Mode
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Game Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8">
+                    <!-- Game Card -->
+                    <div class="card game-main-card shadow-lg">
+                        <div class="card-body text-center p-4 p-md-5">
+                            <!-- Game Header -->
+                            <div class="game-header mb-4">
+                                <span class="display-3 d-block mb-2">🎯</span>
+                                <h1 class="neon-text-blue fw-bold">TEBAK ANGKA</h1>
+                                <p class="text-muted">Tebak angka rahasia antara 1 - 10</p>
+                            </div>
+
+                            <!-- Score & Lives -->
+                            <div class="row g-3 mb-4">
+                                <div class="col-6">
+                                    <div class="card bg-black border border-info p-3">
+                                        <h5 class="text-info mb-0">⭐ Score</h5>
+                                        <span class="display-5 neon-text-blue fw-bold" id="scoreDisplay">0</span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="card bg-black border border-danger p-3">
+                                        <h5 class="text-danger mb-0">❤️ Lives</h5>
+                                        <span class="display-5 text-danger fw-bold" id="livesDisplay">❤️❤️❤️</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- High Score Badge -->
+                            <div class="mb-3">
+                                <span class="badge bg-info text-dark px-4 py-2 fs-6">
+                                    🏆 Best Score: <span id="highScoreDisplay">0</span>
+                                </span>
+                            </div>
+
+                            <!-- Input Game -->
+                            <div class="game-input-section mb-3">
+                                <div class="input-group input-group-lg">
+                                    <input type="number" id="guessInput" class="form-control text-center fw-bold fs-4"
+                                    placeholder="1-10" min="1" max="10" style="background: #111; color: #0ff; border: 2px solid #0ff;">
+                                    <button id="submitGuess" class="btn btn-info fw-bold px-4" style="background: #0ff; color: #000;">
+                                        🔍 TEBAK!
+                                    </button>
+                                </div>
+                                <small class="text-muted mt-2 d-block">Masukkan angka lalu klik TEBAK atau tekan Enter</small>
+                            </div>
+
+                            <!-- Result Alert -->
+                            <div id="resultAlert" class="alert d-none mt-3" role="alert"></div>
+
+                            <!-- Game Over / Win Message -->
+                            <div id="gameOverMessage" class="mt-3 d-none">
+                                <div class="card bg-dark border border-warning p-3" id="gameOverCard">
+                                    <h3 id="gameOverTitle" class="text-warning"></h3>
+                                    <p id="gameOverText" class="text-info"></p>
+                                </div>
+                            </div>
+
+                            <!-- Restart Button -->
+                            <button id="restartBtn" class="btn btn-outline-warning rounded-pill px-4 mt-3 d-none">
+                                🔄 RESTART GAME
+                            </button>
+
+                            <!-- Quick Number Buttons -->
+                            <div class="mt-4">
+                                <p class="text-muted small mb-2">Klik angka untuk cepat:</p>
+                                <div class="d-flex flex-wrap justify-content-center gap-2">
+                                    <button class="btn btn-outline-info btn-sm quick-num" data-num="1">1</button>
+                                    <button class="btn btn-outline-info btn-sm quick-num" data-num="2">2</button>
+                                    <button class="btn btn-outline-info btn-sm quick-num" data-num="3">3</button>
+                                    <button class="btn btn-outline-info btn-sm quick-num" data-num="4">4</button>
+                                    <button class="btn btn-outline-info btn-sm quick-num" data-num="5">5</button>
+                                    <button class="btn btn-outline-info btn-sm quick-num" data-num="6">6</button>
+                                    <button class="btn btn-outline-info btn-sm quick-num" data-num="7">7</button>
+                                    <button class="btn btn-outline-info btn-sm quick-num" data-num="8">8</button>
+                                    <button class="btn btn-outline-info btn-sm quick-num" data-num="9">9</button>
+                                    <button class="btn btn-outline-info btn-sm quick-num" data-num="10">10</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-center text-info py-4 border-top border-info">
+        <div class="container">
+            <p class="mb-1 neon-text-blue">🕹️ Neo Arcade © 2025</p>
+            <p class="small text-muted mb-0">Game Page | Selamat bermain! 🎮</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html>
