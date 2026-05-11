@@ -358,3 +358,61 @@ function updateAllHighScoreDisplays() {
     }
   };
 })();
+
+function startCountdown() {
+
+  // Contoh: rilis 25 Desember 2025 jam 00:00
+  const countdownDate = new Date('December 25, 2026 00:00:00').getTime();
+
+  const timer = setInterval(function() {
+    const now = new Date().getTime();
+    const distance = countdownDate - now;
+
+    if (distance < 0) {
+      clearInterval(timer);
+      document.getElementById('countdown').innerHTML = "<div class='col-12'><h3 class='text-info'>GAME SUDAH RILIS!</h3></div>";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById('countdownDays').textContent = String(days).padStart(2, '0');
+    document.getElementById('countdownHours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('countdownMinutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('countdownSeconds').textContent = String(seconds).padStart(2, '0');
+  }, 1000);
+}
+
+// Panggil saat halaman dimuat
+document.addEventListener('DOMContentLoaded', function() {
+  if (document.getElementById('countdown')) startCountdown();
+});
+
+  function handleContactSubmit(event) {
+    event.preventDefault(); // Mencegah submit default
+
+    // Ambil nilai input
+    const name = document.getElementById('contactName').value.trim();
+    const email = document.getElementById('contactEmail').value.trim();
+    const message = document.getElementById('contactMessage').value.trim();
+
+    // Buat mailto link
+    const subject = encodeURIComponent('Pesan dari ' + name + ' - Neo Arcade');
+    const body = encodeURIComponent(
+      'Nama: ' + name + '\n' +
+      'Email: ' + email + '\n\n' +
+      'Pesan:\n' + message
+    );
+
+    const mailtoLink = 'mailto:sobatdev@neoarcade.id' +
+      '?subject=' + subject +
+      '&body=' + body;
+
+    // Arahkan ke mailto link (akan membuka email client, bukan tab baru)
+    window.location.href = mailtoLink;
+
+    return false;
+  }
