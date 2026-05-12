@@ -108,7 +108,7 @@ function initTypingAnimation() {
   const typingElement = document.getElementById('typing-text');
   if (!typingElement) return;
 
-  const text = "Hi, I'm Sobat — Future Game Developer";
+  const text = "Hi, I'm Albert — ARCADE DADAKAN Dev";
   let index = 0;
   typingElement.textContent = '';
 
@@ -416,3 +416,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     return false;
   }
+
+  function resetStorage() {
+  if (confirm('Yakin hapus semua data tersimpan (High Score & Games Played)?')) {
+    localStorage.removeItem('neonArcadeHighScore');
+    localStorage.removeItem('neonArcadeGamesPlayed');
+    highScore = 0;
+    updateAllHighScoreDisplays();
+    alert('Data berhasil direset!');
+    location.reload();
+  }
+}
