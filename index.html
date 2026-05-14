@@ -4,38 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arcade Dadakan - Home</title>
+    <!-- Google Font Orbitron -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
-
-<script>
-  function handleContactSubmit(event) {
-    event.preventDefault(); // Mencegah submit default
-
-    // Ambil nilai input
-    const name = document.getElementById('contactName').value.trim();
-    const email = document.getElementById('contactEmail').value.trim();
-    const message = document.getElementById('contactMessage').value.trim();
-
-    // Buat mailto link
-    const subject = encodeURIComponent('Pesan dari ' + name + ' - Neo Arcade');
-    const body = encodeURIComponent(
-      'Nama: ' + name + '\n' +
-      'Email: ' + email + '\n\n' +
-      'Pesan:\n' + message
-    );
-
-    const mailtoLink = 'mailto:sobatdev@neoarcade.id' +
-      '?subject=' + subject +
-      '&body=' + body;
-
-    // Arahkan ke mailto link (akan membuka email client, bukan tab baru)
-    window.location.href = mailtoLink;
-
-    return false;
-  }
-</script>
-
 <body class="bg-dark text-white" data-bs-theme="dark">
     <!-- Loading Screen -->
     <div id="loadingScreen" class="loading-screen">
@@ -52,7 +25,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-info shadow-lg">
         <div class="container">
-            <a class="navbar-brand neon-text-blue fw-bold fs-3" href="index.html">
+            <a class="navbar-brand neon-text-blue fw-bold fs-3" href="index.html" style="font-family: 'Orbitron', sans-serif;">
                 🕹️ <span class="neon-text-purple">ARCADE</span> DADAKAN
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -60,33 +33,66 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item"><a class="nav-link active neon-text-blue mx-2" href="index.html"> Home</a></li>
-                    <li class="nav-item"><a class="nav-link text-info mx-2" href="profile.html"> Profile Dev</a></li>
-                    <li class="nav-item"><a class="nav-link text-info mx-2" href="game.html"> Play Game</a></li>
-                    <li class="nav-item ms-3">
-                        <button id="darkModeToggle" class="btn btn-outline-warning btn-sm rounded-pill px-3">☀️ Light Mode</button>
+                    <li class="nav-item"><a class="nav-link active neon-text-blue mx-2" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-info mx-2" href="profile.html">Profile Dev</a></li>
+                    <li class="nav-item"><a class="nav-link text-info mx-2" href="game.html">Play Game</a></li>
+                    <li class="nav-item ms-3 d-flex align-items-center">
+                        <!-- Dark Mode Toggle Switch -->
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="darkModeToggleSwitch" style="cursor:pointer; width: 3rem; height: 1.5rem;">
+                            <label class="form-check-label text-info" for="darkModeToggleSwitch" id="toggleLabel">🌙 Dark</label>
+                        </div>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section with Background Pattern -->
+    <!-- Hero Section -->
     <section class="hero-section text-center py-5 position-relative overflow-hidden">
         <div class="hero-bg-pattern"></div>
+        <!-- Floating icons -->
+        <div class="floating-icons">
+            <!-- Area atas (hero) -->
+            <span class="floating-icon small" style="top:5%; left:10%;">👾</span>
+            <span class="floating-icon large" style="top:15%; left:80%;">⚡</span>
+            <span class="floating-icon" style="top:25%; left:5%;">🎯</span>
+            <span class="floating-icon small" style="top:30%; left:90%;">🕹️</span>
+            <span class="floating-icon large" style="top:45%; left:15%;">💎</span>
+            <span class="floating-icon" style="top:55%; left:75%;">🔥</span>
+            <span class="floating-icon small" style="top:65%; left:8%;">👾</span>
+            <span class="floating-icon" style="top:70%; left:85%;">🎮</span>
+            
+            <!-- Area tengah (game list & countdown) -->
+            <span class="floating-icon large" style="top:80%; left:20%;">⭐</span>
+            <span class="floating-icon small" style="top:85%; left:60%;">🪐</span>
+            <span class="floating-icon" style="top:90%; left:45%;">💥</span>
+            <span class="floating-icon small" style="top:95%; left:75%;">✨</span>
+            <span class="floating-icon" style="top:100%; left:30%;">🎲</span>
+            
+            <!-- Area bawah (contact) -->
+            <span class="floating-icon large" style="top:110%; left:10%;">🎰</span>
+            <span class="floating-icon" style="top:115%; left:50%;">👾</span>
+            <span class="floating-icon small" style="top:120%; left:80%;">💡</span>
+            <span class="floating-icon" style="top:130%; left:25%;">🎯</span>
+            <span class="floating-icon large" style="top:140%; left:65%;">🕹️</span>
+            <span class="floating-icon small" style="top:150%; left:40%;">⚡</span>
+            <span class="floating-icon" style="top:160%; left:5%;">🌟</span>
+            <span class="floating-icon" style="top:170%; left:55%;">💎</span>
+        </div>
         <div class="container position-relative">
             <div class="row align-items-center min-vh-70">
                 <div class="col-lg-6 text-lg-start text-center mb-4 mb-lg-0">
-                    <h1 class="display-3 fw-bold neon-text-blue mb-3">
+                    <h1 class="display-3 fw-bold neon-text-blue mb-3" style="font-family: 'Orbitron', sans-serif;">
                         WELCOME TO<br>
-                        <span class="neon-text-purple display-1">ARCADE DADAKAN</span>
+                        <span class="neon-text-purple display-1" style="font-size: 4rem;">ARCADE DADAKAN</span>
                     </h1>
-                    <p class="lead text-info mb-4">
+                    <p class="display-8 fw-bold neon-text-blue mb-3" style="font-family: 'Orbitron', sans-serif;">
                         Rasakan pengalaman bermain game arcade klasik dengan sentuhan modern.
                         Tantang dirimu dan raih skor tertinggi!
                     </p>
                     <a href="game.html" class="btn btn-lg neon-btn play-now-btn px-5 py-3 rounded-pill fw-bold">
-                        PLAY NOW
+                        🎮 PLAY NOW
                     </a>
                     <div class="mt-4">
                         <span class="badge bg-info text-dark me-2 px-3 py-2">🏆 High Score: <span id="homeHighScore">0</span></span>
@@ -94,7 +100,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 text-center">
-                    <div class="hero-arcade-machine">
+                    <div class="hero-arcade-machine enlarged">
                         <div class="arcade-screen mx-auto">
                             <div class="arcade-screen-inner d-flex align-items-center justify-content-center">
                                 <span class="display-1">🕹️</span>
@@ -107,29 +113,29 @@
     </section>
 
     <!-- Game List Accordion -->
-    <section class="py-5">
+    <section class="py-5 mt-5">
         <div class="container">
-            <h2 class="text-center neon-text-purple mb-5 fw-bold">GAME LIST</h2>
+            <h2 class="text-center neon-text-purple mb-5 fw-bold" style="font-family: 'Orbitron', sans-serif;">🎯 GAME LIST</h2>
             <div class="accordion" id="gameAccordion">
-                <!-- Game 1: Tebak Angka -->
+                <!-- Game 1 -->
                 <div class="accordion-item bg-dark border-info mb-3">
                     <h2 class="accordion-header">
-                        <button class="accordion-button bg-black text-info fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#game1" aria-expanded="true">
-                            Tebak Angka <span class="badge bg-info text-dark ms-3">⭐ Populer</span>
+                        <button class="accordion-button collapsed bg-black neon-text-blue fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#game1" aria-expanded="true">
+                            🎯 Tebak Angka <span class="badge bg-danger text-light ms-3">⭐ Populer</span>
                         </button>
                     </h2>
                     <div id="game1" class="accordion-collapse collapse show" data-bs-parent="#gameAccordion">
-                        <div class="accordion-body text-white">
+                        <div class="accordion-body text-light">
                             <p>Uji instingmu! Tebak angka rahasia antara 1-10 (atau lebih dengan mode sulit). Kamu punya 3 kesempatan!</p>
                             <a href="game.html" class="btn btn-outline-info btn-sm rounded-pill px-4">Mainkan →</a>
                         </div>
                     </div>
                 </div>
-                <!-- Game 2: Speed Runner (Coming Soon) -->
+                <!-- Game 2 -->
                 <div class="accordion-item bg-dark border-secondary mb-3">
                     <h2 class="accordion-header">
-                        <button class="accordion-button collapsed bg-black text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#game2">
-                            ⚡ Speed Runner <span class="badge bg-warning text-dark ms-3">🔜 Coming Soon</span>
+                        <button class="accordion-button collapsed bg-black text-secondary fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#game2">
+                            ⚡ Speed Runner <span class="badge bg-warning text-light ms-3">🔜 Coming Soon</span>
                         </button>
                     </h2>
                     <div id="game2" class="accordion-collapse collapse" data-bs-parent="#gameAccordion">
@@ -138,11 +144,11 @@
                         </div>
                     </div>
                 </div>
-                <!-- Game 3: Space Shooter -->
+                <!-- Game 3 -->
                 <div class="accordion-item bg-dark border-secondary">
                     <h2 class="accordion-header">
-                        <button class="accordion-button collapsed bg-black text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#game3">
-                            👾 Space Shooter <span class="badge bg-warning text-dark ms-3">🔜 Coming Soon</span>
+                        <button class="accordion-button collapsed bg-black text-secondary fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#game3">
+                            👾 Space Shooter <span class="badge bg-warning text-light ms-3">🔜 Coming Soon</span>
                         </button>
                     </h2>
                     <div id="game3" class="accordion-collapse collapse" data-bs-parent="#gameAccordion">
@@ -156,77 +162,82 @@
     </section>
 
     <!-- Countdown Timer Section -->
-    <section class="py-5 bg-black bg-gradient">
+    <section class="py-5 bg-black bg-gradient mt-5">
         <div class="container text-center">
-            <h2 class="neon-text-blue mb-4">🚀 GAME BARU AKAN DATANG</h2>
+            <h2 class="neon-text-blue mb-4" style="font-family: 'Orbitron', sans-serif;">🚀 GAME BARU AKAN DATANG</h2>
             <div class="row justify-content-center" id="countdown">
                 <div class="col-3 col-md-2">
-                    <div class="card bg-dark border-info p-3">
+                    <div class="card bg-dark border-info p-3 shadow-lg countdown-card">
                         <span class="display-5 neon-text-blue" id="countdownDays">10</span>
                         <small class="text-muted">Hari</small>
                     </div>
                 </div>
                 <div class="col-3 col-md-2">
-                    <div class="card bg-dark border-info p-3">
+                    <div class="card bg-dark border-info p-3 shadow-lg countdown-card">
                         <span class="display-5 neon-text-blue" id="countdownHours">00</span>
                         <small class="text-muted">Jam</small>
                     </div>
                 </div>
                 <div class="col-3 col-md-2">
-                    <div class="card bg-dark border-info p-3">
+                    <div class="card bg-dark border-info p-3 shadow-lg countdown-card">
                         <span class="display-5 neon-text-blue" id="countdownMinutes">00</span>
                         <small class="text-muted">Menit</small>
                     </div>
                 </div>
                 <div class="col-3 col-md-2">
-                    <div class="card bg-dark border-info p-3">
+                    <div class="card bg-dark border-info p-3 shadow-lg countdown-card">
                         <span class="display-5 neon-text-blue" id="countdownSeconds">00</span>
                         <small class="text-muted">Detik</small>
+                    </div>
+                </div>
+            </div>
+            <p class="text-info mt-3">Speed Runner akan rilis dalam:</p>
+        </div>
+    </section>
+
+    <!-- Contact Developer Section -->
+    <section class="py-5 bg-black bg-gradient mt-5">
+        <div class="container">
+            <h2 class="text-center neon-text-blue mb-4 fw-bold" style="font-family: 'Orbitron', sans-serif;">📬 Contact Developer</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="card bg-dark border-info shadow-lg p-4">
+                        <div class="card-body">
+                            <!-- Alert sukses (hidden default) -->
+                            <div id="contactSuccessAlert" class="alert alert-success d-none" role="alert">
+                                ✅ Pesan berhasil dikirim! Terima kasih.
+                            </div>
+                            <form id="contactForm" onsubmit="return handleContactSubmit(event)">
+                                <div class="mb-3">
+                                    <label class="form-label text-info">👤 Nama Kamu</label>
+                                    <input type="text" id="contactName" class="form-control bg-black text-white border-info" placeholder="Nama..." required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label text-info">✉️ Email Kamu</label>
+                                    <input type="email" id="contactEmail" class="form-control bg-black text-white border-info" placeholder="email@kamu.com" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label text-info">💬 Pesan</label>
+                                    <textarea id="contactMessage" rows="4" class="form-control bg-black text-white border-info" placeholder="Tulis pesan..." required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-outline-info rounded-pill px-4 w-100">
+                                    ✉️ Kirim Pesan via Email
+                                </button>
+                            </form>
+                            <p class="text-muted small mt-3 text-center">
+                                * Klik kirim akan membuka aplikasi email default kamu.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Developer Section with Real Form (Fixed) -->
-    <section class="py-5 bg-black bg-gradient">
-    <div class="container">
-        <h2 class="text-center neon-text-blue mb-4 fw-bold">📬 Contact Developer</h2>
-        <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-8">
-            <div class="card bg-dark border-info shadow-lg p-4">
-            <div class="card-body">
-                <form id="contactForm" onsubmit="return handleContactSubmit(event)">
-                <div class="mb-3">
-                    <label class="form-label text-info">Nama Kamu</label>
-                    <input type="text" id="contactName" class="form-control bg-black text-white border-info" placeholder="Nama..." required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label text-info">Email Kamu</label>
-                    <input type="email" id="contactEmail" class="form-control bg-black text-white border-info" placeholder="email@kamu.com" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label text-info">Pesan</label>
-                    <textarea id="contactMessage" rows="4" class="form-control bg-black text-white border-info" placeholder="Tulis pesan..." required></textarea>
-                </div>
-                <button type="submit" class="btn btn-outline-info rounded-pill px-4 w-100">
-                    ✉️ Kirim Pesan via Email
-                </button>
-                </form>
-                <p class="text-muted small mt-3 text-center">
-                * Klik kirim akan membuka aplikasi email default kamu.
-                </p>
-            </div>
-            </div>
-        </div>
-        </div>
-    </div>
-    </section>
-
     <!-- Footer -->
-    <footer class="bg-black text-center text-info py-4 border-top border-info">
+    <footer class="bg-black text-center text-info py-4 border-top border-info mt-5">
         <div class="container">
-            <p class="mb-1 neon-text-blue">🕹️ ARCADE DADAKAN © 2026</p>
+            <p class="mb-1 neon-text-blue" style="font-family: 'Orbitron', sans-serif;">🕹️ ARCADE DADAKAN © 2026</p>
             <p class="small text-muted mb-0">Dibuat dengan Cinta, Bootstrap, HTML, CSS & JavaScript</p>
         </div>
     </footer>
@@ -234,4 +245,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
 </body>
-</html> x
+</html>

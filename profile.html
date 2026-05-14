@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arcade dadakan - Profile Dev</title>
+    <title>Arcade Dadakan - Profile Dev</title>
+    <!-- Google Font Orbitron -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -25,8 +27,8 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-info shadow-lg">
         <div class="container">
-            <a class="navbar-brand neon-text-blue fw-bold fs-3" href="index.html">
-                🕹️ <span class="neon-text-purple">ARCADE </span>DADAKAN
+            <a class="navbar-brand neon-text-blue fw-bold fs-3" href="index.html" style="font-family: 'Orbitron', sans-serif;">
+                🕹️ <span class="neon-text-purple">ARCADE</span> DADAKAN
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -42,10 +44,12 @@
                     <li class="nav-item">
                         <a class="nav-link text-info mx-2" href="game.html">Play Game</a>
                     </li>
-                    <li class="nav-item ms-3">
-                        <button id="darkModeToggle" class="btn btn-outline-warning btn-sm rounded-pill px-3">
-                            ☀️ Light Mode
-                        </button>
+                    <li class="nav-item ms-3 d-flex align-items-center">
+                        <!-- Dark Mode Toggle Switch -->
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="darkModeToggleSwitch" style="cursor:pointer; width: 3rem; height: 1.5rem;">
+                            <label class="form-check-label text-info" for="darkModeToggleSwitch" id="toggleLabel">🌙 Dark</label>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -179,15 +183,14 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black text-center text-info py-4 border-top border-info">
+    <footer class="bg-black text-center text-info py-4 border-top border-info mt-5">
         <div class="container">
-            <p class="mb-1 neon-text-blue">🕹️ ARCADE DADAKAN © 2026</p>
+            <p class="mb-1 neon-text-blue" style="font-family: 'Orbitron', sans-serif;">🕹️ ARCADE DADAKAN © 2026</p>
             <p class="small text-muted mb-0">Profile Page | Dibuat dengan ❤️</p>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

@@ -14,22 +14,41 @@ window.addEventListener('load', function() {
         loadingScreen.style.display = 'none';
       }, 500);
     }
-  }, 2000); // Loading 2 detik
+  }, 3000);
 });
 
-// ========== DARK MODE TOGGLE ==========
+// ========== DARK MODE TOGGLE WITH LOCAL STORAGE ==========
+function applyTheme() {
+  if (darkMode) {
+    document.body.classList.remove('light-mode');
+    document.body.setAttribute('data-bs-theme', 'dark');
+  } else {
+    document.body.classList.add('light-mode');
+    document.body.setAttribute('data-bs-theme', 'light');
+  }
+  // Sinkronkan toggle switch dan label
+  const toggle = document.getElementById('darkModeToggleSwitch');
+  const label = document.getElementById('toggleLabel');
+  if (toggle) toggle.checked = !darkMode;
+  if (label) label.innerHTML = darkMode ? '🌙 Dark' : '☀️ Light';
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-  const darkModeToggle = document.getElementById('darkModeToggle');
-  if (darkModeToggle) {
-    darkModeToggle.addEventListener('click', function() {
-      darkMode = !darkMode;
-      document.body.classList.toggle('light-mode', !darkMode);
-      updateDarkModeButton();
+  // Baca preferensi dari localStorage, default dark = true
+  const savedMode = localStorage.getItem('neoArcadeDarkMode');
+  darkMode = savedMode === null ? true : (savedMode === 'true');
+  applyTheme();
+
+  // Toggle switch event
+  const toggleSwitch = document.getElementById('darkModeToggleSwitch');
+  if (toggleSwitch) {
+    toggleSwitch.checked = !darkMode;
+    toggleSwitch.addEventListener('change', function() {
+      darkMode = !this.checked;
+      localStorage.setItem('neoArcadeDarkMode', darkMode);
+      applyTheme();
     });
   }
-
-  // Set initial state
-  updateDarkModeButton();
 
   // ========== BACKGROUND MUSIC ==========
   initBackgroundMusic();
@@ -49,24 +68,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ========== UPDATE HIGH SCORE DISPLAYS ==========
   updateAllHighScoreDisplays();
+
+  // ========== COUNTDOWN TIMER ==========
+  if (document.getElementById('countdown')) startCountdown();
 });
 
-function updateDarkModeButton() {
-  const btn = document.getElementById('darkModeToggle');
-  if (btn) {
-    if (darkMode) {
-      btn.innerHTML = '☀️ Light Mode';
-      btn.classList.add('btn-outline-warning');
-      btn.classList.remove('btn-outline-dark');
-    } else {
-      btn.innerHTML = '🌙 Dark Mode';
-      btn.classList.add('btn-outline-dark');
-      btn.classList.remove('btn-outline-warning');
-    }
-  }
-}
-
-// ========== BACKGROUND MUSIC (Simple oscillator) ==========
+// ========== BACKGROUND MUSIC ==========
 function initBackgroundMusic() {
   try {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -78,7 +85,7 @@ function initBackgroundMusic() {
 function toggleMusic() {
   const btn = document.getElementById('musicToggle');
   if (!audioCtx) return;
-  
+
   if (musicPlaying) {
     if (musicOscillator) {
       musicOscillator.stop();
@@ -87,16 +94,13 @@ function toggleMusic() {
     musicPlaying = false;
     if (btn) btn.innerHTML = '🔇';
   } else {
-    // Buat simple arcade tone
     musicOscillator = audioCtx.createOscillator();
     const gainNode = audioCtx.createGain();
     musicOscillator.connect(gainNode);
     gainNode.connect(audioCtx.destination);
-    
     musicOscillator.type = 'square';
-    musicOscillator.frequency.setValueAtTime(440, audioCtx.currentTime); // A4
+    musicOscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
     gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
-    
     musicOscillator.start();
     musicPlaying = true;
     if (btn) btn.innerHTML = '🔊';
@@ -118,7 +122,6 @@ function initTypingAnimation() {
       index++;
       setTimeout(typeWriter, 50);
     } else {
-      // Setelah selesai, tambahkan kursor berkedip
       typingElement.style.borderRight = '2px solid var(--neon-blue)';
       typingElement.style.animation = 'blink 0.7s infinite';
     }
@@ -154,24 +157,19 @@ function initGame() {
   const restartBtn = document.getElementById('restartBtn');
   const quickNums = document.querySelectorAll('.quick-num');
 
-  if (!guessInput || !submitBtn) return; // Bukan halaman game
+  if (!guessInput || !submitBtn) return;
 
-  // Generate angka random 1-10
   secretNumber = Math.floor(Math.random() * 10) + 1;
   score = 0;
   lives = 3;
   gameOver = false;
   updateUI();
 
-  // Event listener submit
   submitBtn.addEventListener('click', handleGuess);
   guessInput.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-      handleGuess();
-    }
+    if (e.key === 'Enter') handleGuess();
   });
 
-  // Quick number buttons
   quickNums.forEach(btn => {
     btn.addEventListener('click', function() {
       if (gameOver) return;
@@ -180,7 +178,6 @@ function initGame() {
     });
   });
 
-  // Restart button
   restartBtn.addEventListener('click', restartGame);
 }
 
@@ -192,7 +189,6 @@ function handleGuess() {
   const resultAlert = document.getElementById('resultAlert');
   const gameOverMessage = document.getElementById('gameOverMessage');
 
-  // Validasi input
   if (isNaN(guess) || guess < 1 || guess > 10) {
     showAlert('Masukkan angka antara 1 dan 10!', 'warning');
     guessInput.value = '';
@@ -200,12 +196,10 @@ function handleGuess() {
   }
 
   if (guess === secretNumber) {
-    // Benar!
     score += 10;
     document.getElementById('scoreDisplay').textContent = score;
     showAlert('🎉 BENAR! Angka rahasia adalah ' + secretNumber, 'success');
-    
-    // Cek high score
+
     if (score > highScore) {
       highScore = score;
       localStorage.setItem('neonArcadeHighScore', highScore);
@@ -213,7 +207,6 @@ function handleGuess() {
       updateAllHighScoreDisplays();
     }
 
-    // Confetti saat menang!
     if (typeof confetti !== 'undefined') {
       confetti({
         particleCount: 200,
@@ -222,42 +215,38 @@ function handleGuess() {
       });
     }
 
-    // Game won, tapi bisa lanjut? Di sini kita reset dengan angka baru, lives tetap? 
-    // Untuk gameplay lebih seru: reset lives tetap, angka baru.
     document.getElementById('gameOverCard').querySelector('#gameOverTitle').textContent = '🏆 KAMU MENANG!';
-    document.getElementById('gameOverCard').querySelector('#gameOverText').textContent = 
+    document.getElementById('gameOverCard').querySelector('#gameOverText').textContent =
       'Skor: ' + score + ' | High Score: ' + highScore;
     gameOverMessage.classList.remove('d-none');
     document.getElementById('restartBtn').classList.remove('d-none');
     gameOver = true;
     guessInput.disabled = true;
     document.getElementById('submitGuess').disabled = true;
-    
+
+    incrementGamesPlayed();
   } else {
-    // Salah
     lives--;
     updateLivesDisplay();
-    
+
     if (lives <= 0) {
-      // Game over
       showAlert('💔 GAME OVER! Angka rahasia adalah ' + secretNumber, 'danger');
       gameOverMessage.querySelector('#gameOverTitle').textContent = '💔 GAME OVER';
-      gameOverMessage.querySelector('#gameOverText').textContent = 
+      gameOverMessage.querySelector('#gameOverText').textContent =
         'Angka rahasia: ' + secretNumber + ' | Skor akhir: ' + score;
       gameOverMessage.classList.remove('d-none');
       document.getElementById('restartBtn').classList.remove('d-none');
       gameOver = true;
       guessInput.disabled = true;
       document.getElementById('submitGuess').disabled = true;
-      
-      // Update high score jika perlu
+
       if (score > highScore) {
         highScore = score;
         localStorage.setItem('neonArcadeHighScore', highScore);
         updateAllHighScoreDisplays();
       }
+      incrementGamesPlayed();
     } else {
-      // Beri petunjuk
       if (guess < secretNumber) {
         showAlert('📈 Terlalu kecil! Coba angka lebih besar.', 'info');
       } else {
@@ -281,14 +270,14 @@ function updateUI() {
   document.getElementById('scoreDisplay').textContent = score;
   updateLivesDisplay();
   document.getElementById('highScoreDisplay').textContent = highScore;
-  
+
   const guessInput = document.getElementById('guessInput');
   const submitBtn = document.getElementById('submitGuess');
   if (guessInput && submitBtn) {
     guessInput.disabled = false;
     submitBtn.disabled = false;
   }
-  
+
   document.getElementById('gameOverMessage').classList.add('d-none');
   document.getElementById('restartBtn').classList.add('d-none');
   document.getElementById('resultAlert').classList.add('d-none');
@@ -310,7 +299,7 @@ function restartGame() {
   lives = 3;
   gameOver = false;
   updateUI();
-  
+
   const guessInput = document.getElementById('guessInput');
   if (guessInput) {
     guessInput.value = '';
@@ -327,41 +316,24 @@ function updateAllHighScoreDisplays() {
   highScoreElements.forEach(el => {
     if (el) el.textContent = highScore;
   });
-  
-  // Update games played count jika ada
+
   const gamesPlayedEl = document.getElementById('gamesPlayed');
   if (gamesPlayedEl) {
     let played = parseInt(localStorage.getItem('neonArcadeGamesPlayed') || '0');
-    // Increment hanya saat game selesai? Kita simpan saat game over
-    // Untuk sementara kita biarkan saja tampil jumlah dari storage
     gamesPlayedEl.textContent = played;
   }
 }
 
-// ========== TRACK GAMES PLAYED ==========
-// Panggil ini saat game selesai (menang atau kalah) di handleGuess
-// Kita perlu modifikasi handleGuess untuk increment gamesPlayed
-// Override fungsi handleGuess asli untuk menambahkan tracking
-(function() {
-  const originalHandleGuess = handleGuess;
-  handleGuess = function() {
-    // Cek apakah game berakhir setelah fungsi asli
-    const wasGameOver = gameOver;
-    originalHandleGuess();
-    if (!wasGameOver && gameOver) {
-      // Tambah games played
-      let played = parseInt(localStorage.getItem('neonArcadeGamesPlayed') || '0');
-      played++;
-      localStorage.setItem('neonArcadeGamesPlayed', played);
-      const gamesPlayedEl = document.getElementById('gamesPlayed');
-      if (gamesPlayedEl) gamesPlayedEl.textContent = played;
-    }
-  };
-})();
+function incrementGamesPlayed() {
+  let played = parseInt(localStorage.getItem('neonArcadeGamesPlayed') || '0');
+  played++;
+  localStorage.setItem('neonArcadeGamesPlayed', played);
+  const gamesPlayedEl = document.getElementById('gamesPlayed');
+  if (gamesPlayedEl) gamesPlayedEl.textContent = played;
+}
 
+// ========== COUNTDOWN TIMER ==========
 function startCountdown() {
-
-  // Contoh: rilis 25 Desember 2025 jam 00:00
   const countdownDate = new Date('December 25, 2026 00:00:00').getTime();
 
   const timer = setInterval(function() {
@@ -386,38 +358,37 @@ function startCountdown() {
   }, 1000);
 }
 
-// Panggil saat halaman dimuat
-document.addEventListener('DOMContentLoaded', function() {
-  if (document.getElementById('countdown')) startCountdown();
-});
+// ========== CONTACT FORM WITH ALERT ==========
+function handleContactSubmit(event) {
+  event.preventDefault();
 
-  function handleContactSubmit(event) {
-    event.preventDefault(); // Mencegah submit default
+  const name = document.getElementById('contactName').value.trim();
+  const email = document.getElementById('contactEmail').value.trim();
+  const message = document.getElementById('contactMessage').value.trim();
 
-    // Ambil nilai input
-    const name = document.getElementById('contactName').value.trim();
-    const email = document.getElementById('contactEmail').value.trim();
-    const message = document.getElementById('contactMessage').value.trim();
+  // Tampilkan alert sukses
+  const alert = document.getElementById('contactSuccessAlert');
+  if (alert) {
+    alert.classList.remove('d-none');
+    setTimeout(() => alert.classList.add('d-none'), 3000);
+  }
 
-    // Buat mailto link
+  // Buka mailto setelah delay
+  setTimeout(() => {
     const subject = encodeURIComponent('Pesan dari ' + name + ' - Neo Arcade');
     const body = encodeURIComponent(
       'Nama: ' + name + '\n' +
       'Email: ' + email + '\n\n' +
       'Pesan:\n' + message
     );
+    window.location.href = 'mailto:sobatdev@neoarcade.id?subject=' + subject + '&body=' + body;
+  }, 500);
 
-    const mailtoLink = 'mailto:sobatdev@neoarcade.id' +
-      '?subject=' + subject +
-      '&body=' + body;
+  return false;
+}
 
-    // Arahkan ke mailto link (akan membuka email client, bukan tab baru)
-    window.location.href = mailtoLink;
-
-    return false;
-  }
-
-  function resetStorage() {
+// ========== RESET LOCAL STORAGE ==========
+function resetStorage() {
   if (confirm('Yakin hapus semua data tersimpan (High Score & Games Played)?')) {
     localStorage.removeItem('neonArcadeHighScore');
     localStorage.removeItem('neonArcadeGamesPlayed');

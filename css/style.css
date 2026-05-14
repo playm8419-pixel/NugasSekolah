@@ -15,28 +15,6 @@ body {
   transition: background 0.3s, color 0.3s;
 }
 
-body.light-mode {
-  background: var(--bg-light);
-  color: var(--text-light);
-}
-
-body.light-mode .navbar,
-body.light-mode footer,
-body.light-mode .card {
-  background: white !important;
-  color: black !important;
-}
-
-body.light-mode .bg-black {
-  background: white !important;
-}
-
-body.light-mode .neon-text-blue,
-body.light-mode .neon-text-purple {
-  text-shadow: none !important;
-  color: #0d6efd !important;
-}
-
 /* Neon Text Glow */
 .neon-text-blue {
   color: var(--neon-blue);
@@ -72,12 +50,14 @@ body.light-mode .neon-text-purple {
   color: white;
   box-shadow: 0 0 20px var(--neon-purple);
   animation: pulse 2s infinite;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .play-now-btn:hover {
   background: #9b30ff;
   color: white;
-  box-shadow: 0 0 30px var(--neon-purple);
+  box-shadow: 0 0 35px var(--neon-purple);
+  transform: scale(1.08);
 }
 
 @keyframes pulse {
@@ -180,14 +160,23 @@ body.light-mode .neon-text-purple {
   border: 1px solid #333;
 }
 
+.profile-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .avatar-circle {
   width: 150px;
   height: 150px;
-  background: #222;
-  border-radius: 50%;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 4rem;
+  background: #222;
+  border-radius: 50%;
 }
 
 .neon-border {
@@ -226,7 +215,7 @@ body.light-mode .neon-text-purple {
   box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
 }
 
-/* Carousel Slide */
+/* Carousel Slide (jika masih dipakai) */
 .carousel-slide {
   height: 350px;
   background: linear-gradient(135deg, #0a0a0a, #1a1a2e);
@@ -263,53 +252,398 @@ body.light-mode .neon-text-purple {
   font-size: 5rem;
 }
 
-/* Light mode adjustments for game */
-body.light-mode .game-main-card,
-body.light-mode .profile-card,
-body.light-mode .game-card {
-  background: white !important;
-  border-color: #dee2e6 !important;
+/* Perbesar arcade machine di hero */
+.hero-arcade-machine.enlarged .arcade-screen {
+  width: 350px;
+  height: 350px;
 }
 
-body.light-mode .card.bg-black {
-  background: #f8f9fa !important;
+.hero-arcade-machine.enlarged .arcade-screen-inner {
+  font-size: 6rem;
 }
 
-body.light-mode .text-muted {
-  color: #6c757d !important;
-}
-
-body.light-mode .neon-text-blue,
-body.light-mode .neon-text-purple {
-  text-shadow: none;
-}
-
-/* Pastikan avatar section center sempurna */
-.profile-avatar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Container ikon */
+.floating-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  pointer-events: none; /* agar tidak mengganggu klik */
+  z-index: 0;
 }
 
-.avatar-circle {
-  width: 150px;
-  height: 150px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 4rem; /* opsional, sesuaikan ukuran emoji */
+/* Base style */
+.floating-icon {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.5;
+  animation: floatBase 5s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px rgba(0,255,255,0.4));
 }
 
+/* Variasi ukuran */
+.floating-icon.small {
+  font-size: 1.5rem;
+}
+.floating-icon.large {
+  font-size: 3rem;
+}
+
+/* Animasi */
+@keyframes floatBase {
+  0% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px) rotate(5deg);
+  }
+  50% {
+    transform: translateY(-10px) translateX(-5px) rotate(-3deg);
+  }
+  75% {
+    transform: translateY(-25px) translateX(5px) rotate(2deg);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+}
+
+@keyframes floatAlt {
+  0% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-15px) translateX(-10px) rotate(-5deg);
+  }
+  66% {
+    transform: translateY(-30px) translateX(8px) rotate(4deg);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+}
+
+/* Terapkan animasi berbeda */
+.floating-icon:nth-child(odd) {
+  animation-name: floatBase;
+}
+.floating-icon:nth-child(even) {
+  animation-name: floatAlt;
+  animation-duration: 6s;
+}
+
+/* Light mode: opacity lebih tinggi */
+body.light-mode .floating-icon {
+  opacity: 0.7;
+  filter: drop-shadow(0 0 3px rgba(0,0,0,0.15));
+}
+
+/* Countdown card */
+.countdown-card {
+  backdrop-filter: blur(5px);
+  background: rgba(10, 10, 10, 0.8) !important;
+  transition: transform 0.3s;
+}
+
+.countdown-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Button outline purple */
 .btn-outline-purple {
   border: 2px solid var(--neon-purple);
   color: var(--neon-purple);
   background: transparent;
   transition: all 0.3s;
 }
+
 .btn-outline-purple:hover {
   background: var(--neon-purple);
   color: white;
   box-shadow: 0 0 15px var(--neon-purple);
+}
+
+/* Dark mode switch custom */
+.form-check-input:checked {
+  background-color: #4da8da;
+  border-color: #4da8da;
+}
+
+body.light-mode .form-check-input:checked {
+  background-color: #b39ddb;
+  border-color: #b39ddb;
+}
+
+/* Alert success */
+.alert-success {
+  background: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
+}
+
+/* ========== LIGHT MODE – FULL BLACK & WHITE ========== */
+body.light-mode {
+  background: #ffffff !important;
+  color: #000000 !important;
+  --neon-blue: #000000;
+  --neon-purple: #000000;
+}
+
+/* === RESET TEKS KE HITAM === */
+body.light-mode,
+body.light-mode p,
+body.light-mode span,
+body.light-mode li,
+body.light-mode td,
+body.light-mode th,
+body.light-mode a,
+body.light-mode .text-white,
+body.light-mode .text-info,
+body.light-mode .text-muted,
+body.light-mode .neon-text-blue,
+body.light-mode .neon-text-purple,
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode h3,
+body.light-mode h4,
+body.light-mode h5,
+body.light-mode h6,
+body.light-mode .navbar-brand,
+body.light-mode .nav-link,
+body.light-mode .accordion-button,
+body.light-mode .form-label,
+body.light-mode .badge,
+body.light-mode .countdown-card .neon-text-blue,
+body.light-mode footer .neon-text-blue,
+body.light-mode .display-1,
+body.light-mode .display-3,
+body.light-mode .display-5,
+body.light-mode .display-8,
+body.light-mode .lead,
+body.light-mode .fw-bold,
+body.light-mode small {
+  color: #000000 !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: #000000 !important;
+  background: none !important; /* hapus gradient */
+}
+
+/* PENGECUALIAN: Teks di tombol tetap putih */
+body.light-mode .btn,
+body.light-mode .btn-outline-info,
+body.light-mode .play-now-btn,
+body.light-mode .btn-outline-purple,
+body.light-mode .progress-bar {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Tombol utama */
+body.light-mode .play-now-btn {
+  background: #000000 !important;
+  border: 2px solid #000000 !important;
+  animation: none;
+}
+body.light-mode .play-now-btn:hover {
+  background: #333333 !important;
+}
+
+body.light-mode .btn-outline-info {
+  background: #000000 !important;
+  border: 2px solid #000000 !important;
+  color: #ffffff !important;
+}
+body.light-mode .btn-outline-info:hover {
+  background: #333333 !important;
+}
+
+/* Link biasa */
+body.light-mode a:not(.btn) {
+  color: #000000 !important;
+}
+
+/* === BACKGROUND PUTIH DI SEMUA SECTION === */
+body.light-mode section,
+body.light-mode .hero-section,
+body.light-mode .bg-black,
+body.light-mode .bg-dark,
+body.light-mode .bg-gradient,
+body.light-mode .bg-black.bg-gradient {
+  background: #ffffff !important;
+  background-image: none !important;
+}
+
+body.light-mode .hero-bg-pattern {
+  display: none;
+}
+
+/* === NAVBAR === */
+body.light-mode .navbar {
+  background: #ffffff !important;
+  border-bottom: 1px solid #000000 !important;
+  box-shadow: none;
+}
+
+/* === CARD UMUM === */
+body.light-mode .card {
+  background: #ffffff !important;
+  border: 1px solid #000000 !important;
+  box-shadow: none !important;
+}
+
+/* === ACCORDION === */
+body.light-mode .accordion-item {
+  border: 1px solid #000000 !important;
+}
+body.light-mode .accordion-button {
+  background: #ffffff !important;
+  border-left: 4px solid #000000 !important;
+}
+body.light-mode .accordion-button:not(.collapsed) {
+  background: #f5f5f5 !important;
+}
+
+/* === COUNTDOWN === */
+body.light-mode .countdown-card {
+  border: 1px solid #000000 !important;
+  box-shadow: none !important;
+  backdrop-filter: none;
+}
+body.light-mode .countdown-card:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;
+}
+
+/* === FORM KONTAK === */
+body.light-mode .form-control {
+  background: #ffffff !important;
+  border: 1px solid #000000 !important;
+  color: #000000 !important;
+}
+body.light-mode .form-control:focus {
+  border-color: #000000 !important;
+  box-shadow: 0 0 0 4px rgba(0,0,0,0.1) !important;
+}
+
+/* === FOOTER === */
+body.light-mode footer {
+  background: #ffffff !important;
+  border-top: 1px solid #000000 !important;
+}
+
+/* === BADGE === */
+body.light-mode .badge {
+  border: 1px solid #000000 !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* === PROGRESS BAR (SKILL) === */
+body.light-mode .skill-progress {
+  background: #f0f0f0 !important;
+}
+body.light-mode .progress-bar {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+body.light-mode .progress-bar.bg-info,
+body.light-mode .progress-bar.bg-purple {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* === LOADING SCREEN === */
+body.light-mode #loadingScreen {
+  background: #ffffff !important;
+}
+body.light-mode #loadingScreen .neon-text-blue,
+body.light-mode #loadingScreen h2 {
+  color: #000000 !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+body.light-mode .spinner-glow {
+  border: 4px solid rgba(0,0,0,0.2) !important;
+  border-top: 4px solid #000000 !important;
+  box-shadow: none !important;
+}
+body.light-mode .loading-bar {
+  background: #e0e0e0 !important;
+}
+body.light-mode .loading-bar-fill {
+  background: #000000 !important;
+  box-shadow: none !important;
+}
+
+/* === PROFILE SPESIFIK === */
+body.light-mode .avatar-circle {
+  background: #ffffff !important;
+  border: 4px solid #000000 !important;
+  box-shadow: none !important;
+}
+body.light-mode .neon-border {
+  border: 4px solid #000000 !important;
+  box-shadow: none !important;
+}
+body.light-mode .table-dark {
+  color: #000000 !important;
+  background: transparent !important;
+}
+body.light-mode .table-dark td,
+body.light-mode .table-dark th {
+  color: #000000 !important;
+  border-color: #ccc !important;
+}
+
+/* === TOGGLE SWITCH === */
+body.light-mode .form-check-input:checked {
+  background-color: #000000;
+  border-color: #000000;
+}
+/* Tombol "TEBAK!" di game */
+body.light-mode .btn-info {
+  background: #000 !important;
+  border-color: #000 !important;
+  color: #fff !important;
+}
+
+/* Input angka di game */
+body.light-mode .form-control.bg-dark {
+  background: #fff !important;
+  color: #000 !important;
+  border: 1px solid #000 !important;
+}
+
+/* Card score & lives (yang pakai bg-black) */
+body.light-mode .card.bg-black {
+  background: #fff !important;
+  border: 1px solid #000 !important;
+}
+
+/* Game over card */
+body.light-mode .card.border-warning {
+  border-color: #000 !important;
+}
+
+/* Alert */
+body.light-mode .alert {
+  background: #fff !important;
+  color: #000 !important;
+  border: 1px solid #000 !important;
+}
+
+/* Tombol restart */
+body.light-mode .btn-outline-warning {
+  background: #000 !important;
+  border-color: #000 !important;
+  color: #fff !important;
+}
+
+@media (max-width: 768px) {
+  .floating-icons .floating-icon {
+    font-size: 1.5rem;
+  }
+  .floating-icon.large {
+    font-size: 2rem;
+  }
 }
