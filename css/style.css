@@ -647,3 +647,149 @@ body.light-mode .btn-outline-warning {
     font-size: 2rem;
   }
 }
+
+body.light-mode .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='black' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+body.light-mode .navbar-toggler {
+  border-color: black !important;
+}
+
+.navbar-brand {
+  white-space: nowrap;
+  font-size: 1.8rem;
+}
+
+@media (max-width: 576px) {
+  .navbar-brand {
+    font-size: 1.2rem; /* lebih kecil di HP */
+  }
+}
+
+/* Pastikan brand tidak memaksa toggler turun */
+.navbar-brand {
+  white-space: nowrap;
+  font-size: 1.8rem;
+  flex-shrink: 0; /* jangan mengecil */
+}
+
+@media (max-width: 576px) {
+  .navbar-brand {
+    font-size: 1.2rem; /* kecilkan di HP */
+  }
+}
+
+.countdown-card .display-5 {
+  font-size: 2rem;
+  white-space: nowrap;
+}
+@media (min-width: 576px) {
+  .countdown-card .display-5 {
+    font-size: 3rem;
+  }
+}
+
+.container, .container-fluid {
+  max-width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Pastikan floating icons tidak keluar batas */
+.floating-icons {
+  overflow: hidden;
+}
+
+/* Navbar brand tidak memaksa lebar */
+.navbar-brand {
+  max-width: calc(100% - 60px); /* sisakan ruang untuk toggler */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.game-main-card {
+  max-width: 100%;
+}
+
+/* Perkecil font judul di mobile */
+@media (max-width: 576px) {
+  h1 .display-1.neon-text-purple {
+    font-size: 2.8rem !important; /* turunkan dari 4rem */
+  }
+  h1.display-3 {
+    font-size: 2rem !important;
+  }
+}
+
+/* Pastikan menu tampil normal saat collapse */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    position: static;
+    float: none;
+    clear: both;
+  }
+  .navbar-nav {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* =============================================
+   PERBAIKAN NAVBAR COLLAPSE DI LIGHT MODE
+   ============================================= */
+body.light-mode .navbar-collapse {
+  background: #ffffff !important;
+  border: 1px solid #000 !important;
+  border-top: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+body.light-mode .navbar-collapse .nav-link {
+  color: #000 !important;
+}
+
+body.light-mode .navbar-collapse .nav-link.active {
+  font-weight: bold;
+  color: #000 !important;
+}
+
+
+/* 
+
+body.light-mode .navbar-collapse {
+  background: #ffffff !important;
+  border: 1px solid #000;
+}
+
+body.light-mode .navbar-collapse .nav-link {
+  color: #000 !important;
+}
+
+/* =============================================
+   PERBAIKAN NAVBAR MOBILE – MENU TURUN KE BAWAH
+   ============================================= */
+.navbar-collapse {
+  width: 100% !important;
+  max-width: 100%;
+  overflow-x: visible;   /* jangan hidden */
+}
+
+.navbar-collapse.show {
+  display: block !important;
+  position: static;      /* agar tidak absolute ke samping */
+  background: inherit;
+  border: none;
+  box-shadow: none;
+}
+
+/* Light mode spesifik */
+body.light-mode .navbar-collapse.show {
+  background: #ffffff !important;
+  border: 1px solid #000 !important;
+  border-top: none;
+}
+
+body.light-mode .navbar-collapse .nav-link {
+  color: #000 !important;
+}
+

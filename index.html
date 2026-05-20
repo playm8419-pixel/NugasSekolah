@@ -24,29 +24,64 @@
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-info shadow-lg">
-        <div class="container">
-            <a class="navbar-brand neon-text-blue fw-bold fs-3" href="index.html" style="font-family: 'Orbitron', sans-serif;">
-                🕹️ <span class="neon-text-purple">ARCADE</span> DADAKAN
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item"><a class="nav-link active neon-text-blue mx-2" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link text-info mx-2" href="profile.html">Profile Dev</a></li>
-                    <li class="nav-item"><a class="nav-link text-info mx-2" href="game.html">Play Game</a></li>
-                    <li class="nav-item ms-3 d-flex align-items-center">
-                        <!-- Dark Mode Toggle Switch -->
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="darkModeToggleSwitch" style="cursor:pointer; width: 3rem; height: 1.5rem;">
-                            <label class="form-check-label text-info" for="darkModeToggleSwitch" id="toggleLabel">🌙 Dark</label>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+    <div class="container">
+
+        <!-- Brand -->
+        <a class="navbar-brand neon-text-blue fw-bold"
+           href="index.html"
+           style="font-family: 'Orbitron', sans-serif;">
+            🕹️ <span class="neon-text-purple">ARCADE</span> DADAKAN
+        </a>
+
+        <!-- Toggler -->
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menu -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+                    <a class="nav-link text-info mx-2" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active neon-text-blue mx-2" href="profile.html">
+                        Profile Dev
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-info mx-2" href="game.html">
+                        Play Game
+                    </a>
+                </li>
+                <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+
+                    <div class="form-check form-switch">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               id="darkModeToggleSwitch">
+
+                        <label class="form-check-label text-info"
+                               for="darkModeToggleSwitch"
+                               id="toggleLabel">
+
+                            🌙 Dark
+                        </label>
+                    </div>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <!-- Hero Section -->
     <section class="hero-section text-center py-5 position-relative overflow-hidden">
@@ -85,7 +120,7 @@
                 <div class="col-lg-6 text-lg-start text-center mb-4 mb-lg-0">
                     <h1 class="display-3 fw-bold neon-text-blue mb-3" style="font-family: 'Orbitron', sans-serif;">
                         WELCOME TO<br>
-                        <span class="neon-text-purple display-1" style="font-size: 4rem;">ARCADE DADAKAN</span>
+                        <span class="neon-text-purple display-1 text break" style="font-size: 4rem;">ARCADE DADAKAN</span>
                     </h1>
                     <p class="display-8 fw-bold neon-text-blue mb-3" style="font-family: 'Orbitron', sans-serif;">
                         Rasakan pengalaman bermain game arcade klasik dengan sentuhan modern.
@@ -163,35 +198,35 @@
 
     <!-- Countdown Timer Section -->
     <section class="py-5 bg-black bg-gradient mt-5">
-        <div class="container text-center">
-            <h2 class="neon-text-blue mb-4" style="font-family: 'Orbitron', sans-serif;">🚀 GAME BARU AKAN DATANG</h2>
-            <div class="row justify-content-center" id="countdown">
-                <div class="col-3 col-md-2">
-                    <div class="card bg-dark border-info p-3 shadow-lg countdown-card">
-                        <span class="display-5 neon-text-blue" id="countdownDays">10</span>
-                        <small class="text-muted">Hari</small>
-                    </div>
-                </div>
-                <div class="col-3 col-md-2">
-                    <div class="card bg-dark border-info p-3 shadow-lg countdown-card">
-                        <span class="display-5 neon-text-blue" id="countdownHours">00</span>
-                        <small class="text-muted">Jam</small>
-                    </div>
-                </div>
-                <div class="col-3 col-md-2">
-                    <div class="card bg-dark border-info p-3 shadow-lg countdown-card">
-                        <span class="display-5 neon-text-blue" id="countdownMinutes">00</span>
-                        <small class="text-muted">Menit</small>
-                    </div>
-                </div>
-                <div class="col-3 col-md-2">
-                    <div class="card bg-dark border-info p-3 shadow-lg countdown-card">
-                        <span class="display-5 neon-text-blue" id="countdownSeconds">00</span>
-                        <small class="text-muted">Detik</small>
-                    </div>
+        <div class="row justify-content-center" id="countdown">
+            <div class="col-6 col-sm-3 col-md-3">
+                <div class="card bg-dark border-info p-3 shadow-lg countdown-card">
+                    <span role="img" aria-label="hari">📅</span>
+                    <span class="display-5 neon-text-blue text-nowrap" id="countdownDays">10</span>
+                    <small class="text-muted">Hari</small>
                 </div>
             </div>
-            <p class="text-info mt-3">Speed Runner akan rilis dalam:</p>
+            <div class="col-6 col-sm-3 col-md-3">
+                <div class="card bg-dark border-info p-3 shadow-lg countdown-card">
+                    <span role="img" aria-label="jam">⏰</span>
+                    <span class="display-5 neon-text-blue text-nowrap" id="countdownHours">00</span>
+                    <small class="text-muted">Jam</small>
+                </div>
+            </div>
+            <div class="col-6 col-sm-3 col-md-3">
+                <div class="card bg-dark border-info p-3 shadow-lg countdown-card">
+                    <span role="img" aria-label="menit">⏳</span>
+                    <span class="display-5 neon-text-blue text-nowrap" id="countdownMinutes">00</span>
+                    <small class="text-muted">Menit</small>
+                </div>
+            </div>
+            <div class="col-6 col-sm-3 col-md-3">
+                <div class="card bg-dark border-info p-3 shadow-lg countdown-card">
+                    <span role="img" aria-label="detik">🕒</span>
+                    <span class="display-5 neon-text-blue text-nowrap" id="countdownSeconds">00</span>
+                    <small class="text-muted">Detik</small>
+                </div>
+            </div>
         </div>
     </section>
 
